@@ -3,6 +3,7 @@ import {
   NavigationProp,
   RouteProp,
 } from "@react-navigation/native";
+import Meal from "./models/meal";
 
 export interface RouteParamList extends ParamListBase {
   MealsOverview: {
@@ -10,6 +11,9 @@ export interface RouteParamList extends ParamListBase {
   };
   Categories: {
     x: string;
+  };
+  MealScreen: {
+    meal: Meal;
   };
 }
 

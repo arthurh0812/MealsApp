@@ -5,21 +5,13 @@ import {
   Text,
   FlatList,
   ListRenderItemInfo,
-  TouchableOpacity,
   StyleSheet,
-  Dimensions,
 } from "react-native";
-
-import {
-  NavigationProp,
-  ParamListBase,
-  RouteProp,
-} from "@react-navigation/native";
 
 import { CATEGORIES } from "../data/samples";
 import CategoryProps from "../models/category";
 import Category from "../components/Category";
-import { RouteParamList, ScreenProps } from "../routes";
+import { ScreenProps } from "../routes";
 
 function CategoriesScreen({ navigation }: ScreenProps<"Categories">) {
   function renderFunc({ item }: ListRenderItemInfo<CategoryProps>) {
@@ -27,7 +19,7 @@ function CategoriesScreen({ navigation }: ScreenProps<"Categories">) {
       navigation.navigate("MealsOverview", { categoryId: item.id });
     }
 
-    return <Category cg={item} onPress={pressHandler} />;
+    return <Category data={item} onPress={pressHandler} />;
   }
 
   return (

@@ -1,10 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
+import MealScreen from "./screens/MealScreen";
 import { CATEGORIES } from "./data/samples";
+import { ScreenProps } from "./routes";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,8 +15,12 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Categories" component={CategoriesScreen} />
+        <Stack.Navigator initialRouteName="Categories">
+          <Stack.Screen
+            name="Categories"
+            component={CategoriesScreen}
+            options={{ title: "Select a Category" }}
+          />
           <Stack.Screen
             name="MealsOverview"
             component={MealsOverviewScreen}
@@ -24,6 +30,14 @@ export default function App() {
               } Overview`,
             })}
             initialParams={{ categoryId: "c1" }}
+          />
+          <Stack.Screen
+            name="MealScreen"
+            component={MealScreen}
+            options={({ route }) => {
+              const meal = route.params.meal;
+              return { title: meal.title };
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

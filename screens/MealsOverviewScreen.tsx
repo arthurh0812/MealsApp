@@ -10,27 +10,44 @@ import {
 import Meal from "../components/Meal";
 
 import MealData from "../models/meal";
-import { MEALS } from "../data/samples";
-import { RouteProp } from "@react-navigation/native";
-import { RouteParamList, ScreenProps } from "../routes";
+import Category from "../models/category";
+import { CATEGORIES, MEALS } from "../data/samples";
+import { ScreenProps } from "../routes";
 
-function MealsOverviewScreen({ route }: ScreenProps<"MealsOverview">) {
+function MealsOverviewScreen({
+  route,
+  navigation,
+}: ScreenProps<"MealsOverview">) {
+  const catId = route.params.categoryId;
   const meals = MEALS.filter((meal) => {
-    return meal.categoryIds.includes(route.params.categoryId);
+    return meal.categoryIds.includes(catId);
   });
+  const category = CATEGORIES.find((c) => c.id == catId) as Category;
+  const color = category.color;
 
   const renderFunc = ({ item }: ListRenderItemInfo<MealData>) => {
-    return <Meal data={item} />;
+    function onPress() {
+      navigation.navigate("MealScreen", { meal: item });
+    }
+    return <Meal data={item} color={color as string} onPress={onPress} />;
   };
 
   return (
     <View style={styles.screen}>
-      <FlatList
-        data={meals}
-        renderItem={renderFunc}
-        keyExtractor={(meal: MealData) => meal.id}
-      />
-      <Text style={styles.title}>{meals.length}</Text>
+      <View style={styles.mealsListContainer}>
+        <FlatList
+          data={meals}
+          renderItem={renderFunc}
+          keyExtractor={(meal: MealData) => meal.id}
+          contentContainerStyle={styles.mealsList}
+        />
+      </View>
+      <View style={styles.infoBox}>
+        <Text style={styles.title}>
+          {meals.length > 0 ? meals.length : `no`} result
+          {meals.length != 1 && "s"}
+        </Text>
+      </View>
     </View>
   );
 }
@@ -38,13 +55,23 @@ function MealsOverviewScreen({ route }: ScreenProps<"MealsOverview">) {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     color: "grey",
+  },
+  mealsListContainer: {
+    flex: 20,
+  },
+  mealsList: {
+    flex: 0,
+    alignItems: "flex-start",
+  },
+  infoBox: {
+    flex: 1,
+    alignItems: "center",
+    marginBottom: 24,
   },
 });
 

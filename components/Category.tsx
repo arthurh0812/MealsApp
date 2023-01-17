@@ -12,23 +12,23 @@ import {
 import CategoryData from "../models/category";
 
 type CategoryProps = {
-  cg: CategoryData;
+  data: CategoryData;
   onPress: (e: GestureResponderEvent) => void;
 };
 
-function Category({ cg, onPress }: CategoryProps) {
+function Category({ data, onPress }: CategoryProps) {
   return (
     <View style={styles.categoryContainer}>
       <Pressable
         android_ripple={{ color: "lightgrey" }}
         style={({ pressed }) => [
           styles.categoryBtn,
-          { backgroundColor: cg.color, opacity: pressed ? 0.6 : 1 },
+          { backgroundColor: data.color, opacity: pressed ? 0.6 : 1 },
         ]}
         onPress={onPress}
       >
-        <Text style={styles.categoryTitle}>{cg.title}</Text>
-        <Text style={styles.categoryId}>{cg.id}</Text>
+        <Text style={styles.categoryTitle}>{data.title}</Text>
+        <Text style={styles.categoryId}>{data.id}</Text>
       </Pressable>
     </View>
   );
