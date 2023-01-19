@@ -23,13 +23,14 @@ function MealsOverviewScreen({
     return meal.categoryIds.includes(catId);
   });
   const category = CATEGORIES.find((c) => c.id == catId) as Category;
-  const color = category.color;
 
   const renderFunc = ({ item }: ListRenderItemInfo<MealData>) => {
     function onPress() {
       navigation.navigate("MealScreen", { meal: item });
     }
-    return <Meal data={item} color={color as string} onPress={onPress} />;
+    return (
+      <Meal data={item} color={category.color as string} onPress={onPress} />
+    );
   };
 
   return (

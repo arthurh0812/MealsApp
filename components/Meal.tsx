@@ -54,6 +54,8 @@ const styles = StyleSheet.create({
   mealContainer: {
     marginVertical: margin / 2,
     marginHorizontal: margin,
+    borderRadius: margin,
+    overflow: "hidden",
   },
   mealBtn: {},
   mealInner: {},
@@ -61,7 +63,6 @@ const styles = StyleSheet.create({
   mealImage: {
     width: win.width - margin * 2,
     height: win.width / 2,
-    borderRadius: margin,
   },
   overlay: {
     position: "absolute",
@@ -71,7 +72,6 @@ const styles = StyleSheet.create({
     left: 0,
     opacity: 0.2,
     zIndex: 1,
-    borderRadius: margin,
   },
   mealInfo: {
     position: "absolute",

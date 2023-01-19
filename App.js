@@ -10,16 +10,27 @@ import { ScreenProps } from "./routes";
 
 const Stack = createNativeStackNavigator();
 
+const defaultHeaderStyle = {
+  color: "black",
+  fontWeight: "700",
+  fontSize: 20,
+};
+
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Categories">
+        <Stack.Navigator
+          initialRouteName="Categories"
+          screenOptions={{ headerTitleStyle: defaultHeaderStyle }}
+        >
           <Stack.Screen
             name="Categories"
             component={CategoriesScreen}
-            options={{ title: "Select a Category" }}
+            options={{
+              title: "Select a Category",
+            }}
           />
           <Stack.Screen
             name="MealsOverview"
@@ -36,7 +47,9 @@ export default function App() {
             component={MealScreen}
             options={({ route }) => {
               const meal = route.params.meal;
-              return { title: meal.title };
+              return {
+                title: meal.title,
+              };
             }}
           />
         </Stack.Navigator>
