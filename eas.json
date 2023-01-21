@@ -4,11 +4,17 @@
   },
   "build": {
     "development": {
+      "channel": "staging",
       "developmentClient": true,
       "distribution": "internal"
     },
-    "preview": {},
-    "production": {}
+    "preview": {
+      "channel": "staging",
+      "distribution": "internal"
+    },
+    "production": {
+
+    }
   },
   "submit": {
     "production": {}

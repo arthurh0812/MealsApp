@@ -11,16 +11,20 @@ import {
 } from "react-native";
 
 import MealData from "../models/meal";
+import { RouteParamList } from "../routes";
+
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type MealProps = {
   data: MealData;
   color: string;
-  onPress: (e: GestureResponderEvent) => void;
 };
 
 const win = Dimensions.get("window");
 
-function Meal({ data, color, onPress }: MealProps) {
+function Meal({ data, color }: MealProps) {
+  const navigation = useNavigation<NativeStackNavigationProp<RouteParamList>>();
   return (
     <View style={styles.mealContainer}>
       <Pressable
@@ -28,7 +32,9 @@ function Meal({ data, color, onPress }: MealProps) {
           styles.mealBtn,
           { opacity: pressed ? 0.6 : 1 },
         ]}
-        onPress={onPress}
+        onPress={() => {
+          navigation.navigate("MealScreen", { meal: data });
+        }}
       >
         <View style={styles.mealInner}>
           <View style={styles.mealBackground}>

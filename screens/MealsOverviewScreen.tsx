@@ -24,14 +24,9 @@ function MealsOverviewScreen({
   });
   const category = CATEGORIES.find((c) => c.id == catId) as Category;
 
-  const renderFunc = ({ item }: ListRenderItemInfo<MealData>) => {
-    function onPress() {
-      navigation.navigate("MealScreen", { meal: item });
-    }
-    return (
-      <Meal data={item} color={category.color as string} onPress={onPress} />
-    );
-  };
+  const renderFunc = ({ item }: ListRenderItemInfo<MealData>) => (
+    <Meal data={item} color={category.color as string} />
+  );
 
   return (
     <View style={styles.screen}>
